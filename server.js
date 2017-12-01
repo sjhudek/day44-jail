@@ -55,7 +55,12 @@ function  wardensOffice (req, res, next) {
         if (user.role === 'warden') {
             next()
         }
-    });
+        else {
+            res.sendFile('./html/forbidden.html', {
+                root: './public'
+            });
+        };
+    };
 };
 
 function  jail (req, res, next) {
@@ -63,43 +68,68 @@ function  jail (req, res, next) {
         if (user.role === 'warden' || user.role === 'guard' || user.role === 'prisoner') {
             next()
         }
-    });
+        else {
+            res.sendFile('./html/forbidden.html', {
+                root: './public'
+            });
+        };
+    };
 };
 
 function  lobby (req, res, next) {
-   User.findOne({_id: req.session.uid}, function(err, user){
+ User.findOne({_id: req.session.uid}, function(err, user){
     if (user.role === 'warden' || user.role === 'guard' || user.role === 'visitor') {
         next()
     }
-});
+    else {
+        res.sendFile('./html/forbidden.html', {
+            root: './public'
+        });
+    };
+};
 };
 
 function  visitorsLounge (req, res, next) {
-   User.findOne({_id: req.session.uid}, function(err, user){
+ User.findOne({_id: req.session.uid}, function(err, user){
     if (user.role === 'warden' || user.role === 'guard' || user.role === 'visitor') {
         next()
     }
-});
+    else {
+        res.sendFile('./html/forbidden.html', {
+            root: './public'
+        });
+    };
+};
 };
 
 function  cafeteria (req, res, next) {
-   User.findOne({_id: req.session.uid}, function(err, user){
+ User.findOne({_id: req.session.uid}, function(err, user){
     if (user.role === 'warden' || user.role === 'guard' || user.role === 'prisoner') {
         next()
     }
-});
+    else {
+        res.sendFile('./html/forbidden.html', {
+            root: './public'
+        });
+    };
+};
 };
 
 function  cellE (req, res, next) {
-   User.findOne({_id: req.session.uid}, function(err, user){
+ User.findOne({_id: req.session.uid}, function(err, user){
     if (user.role === 'warden' || user.role === 'guard' || user.username === 'Eve') {
         next()
     }
-});
+    else {
+        res.sendFile('./html/forbidden.html', {
+            root: './public'
+        });
+    };
+};
 };
 
 function  cellM (req, res, next) {
-   User.findOne({_id: req.session.uid}, function(err, user){
+ User.findOne({_id: req.session.uid}, function(err, user){
     if (user.role === 'warden' || user.role === 'guard' || user.username === 'Mallory') {
         next()
     }
